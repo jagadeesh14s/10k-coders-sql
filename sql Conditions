@@ -1,0 +1,64 @@
+create table employees (id int,name varchar(50),age int,salary bigint,department varchar(50));
+
+insert into employees values(1, 'john', 28, 55000, 'marketing'),(2, 'alice', 35, 70000, 'hr'),(3, 'bob', 24, 45000, 'marketing'),(4, 'david', 40, 60000, 'it'),(5, 'emma', 30, 52000, 'marketing'),(6, 'michael', 45, 80000, 'finance'),(7, 'sophia', 27, 48000, 'marketing'),(8, 'james', 38, 65000, 'it'),(9, 'olivia', 32, 58000, 'marketing'),(10, 'william', 26, 50000, 'hr');
+
+select * from employees;
++----+---------+-----+--------+------------+
+| id | name    | age | salary | department |
++----+---------+-----+--------+------------+
+|  1 | rahul   |  28 |  55000 | marketing  |
+|  2 | priya   |  35 |  70000 | hr         |
+|  3 | arjun   |  24 |  45000 | marketing  |
+|  4 | suresh  |  40 |  60000 | it         |
+|  5 | kavya   |  30 |  52000 | marketing  |
+|  6 | vijay   |  45 |  80000 | finance    |
+|  7 | deepika |  27 |  48000 | marketing  |
+|  8 | rohit   |  38 |  65000 | it         |
+|  9 | anjali  |  32 |  58000 | marketing  |
+| 10 | kiran   |  26 |  50000 | hr         |
++----+---------+-----+--------+------------+
+10 rows in set (0.0010 sec)
+
+-- employees whose salary is greater than 50000
+select * from employees where salary > 50000;
++----+--------+-----+--------+------------+
+| id | name   | age | salary | department |
++----+--------+-----+--------+------------+
+|  1 | rahul  |  28 |  55000 | marketing  |
+|  2 | priya  |  35 |  70000 | hr         |
+|  4 | suresh |  40 |  60000 | it         |
+|  5 | kavya  |  30 |  52000 | marketing  |
+|  6 | vijay  |  45 |  80000 | finance    |
+|  8 | rohit  |  38 |  65000 | it         |
+|  9 | anjali |  32 |  58000 | marketing  |
++----+--------+-----+--------+------------+
+7 rows in set (0.0008 sec)
+
+-- employees between 25 and 40 years old (inclusive)
+select * from employees where age between 25 and 40;
++----+---------+-----+--------+------------+
+| id | name    | age | salary | department |
++----+---------+-----+--------+------------+
+|  1 | rahul   |  28 |  55000 | marketing  |
+|  2 | priya   |  35 |  70000 | hr         |
+|  4 | suresh  |  40 |  60000 | it         |
+|  5 | kavya   |  30 |  52000 | marketing  |
+|  7 | deepika |  27 |  48000 | marketing  |
+|  8 | rohit   |  38 |  65000 | it         |
+|  9 | anjali  |  32 |  58000 | marketing  |
+| 10 | kiran   |  26 |  50000 | hr         |
++----+---------+-----+--------+------------+
+8 rows in set (0.0015 sec)
+
+-- employees in marketing department with salary less than 60000
+select * from employees where department = 'marketing' and salary < 60000;
++----+---------+-----+--------+------------+
+| id | name    | age | salary | department |
++----+---------+-----+--------+------------+
+|  1 | rahul   |  28 |  55000 | marketing  |
+|  3 | arjun   |  24 |  45000 | marketing  |
+|  5 | kavya   |  30 |  52000 | marketing  |
+|  7 | deepika |  27 |  48000 | marketing  |
+|  9 | anjali  |  32 |  58000 | marketing  |
++----+---------+-----+--------+------------+
+5 rows in set (0.0013 sec)
