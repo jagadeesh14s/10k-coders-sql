@@ -2,6 +2,7 @@ create table employees (id int,name varchar(50),age int,salary bigint,department
 
 insert into employees values(1, 'john', 28, 55000, 'marketing'),(2, 'alice', 35, 70000, 'hr'),(3, 'bob', 24, 45000, 'marketing'),(4, 'david', 40, 60000, 'it'),(5, 'emma', 30, 52000, 'marketing'),(6, 'michael', 45, 80000, 'finance'),(7, 'sophia', 27, 48000, 'marketing'),(8, 'james', 38, 65000, 'it'),(9, 'olivia', 32, 58000, 'marketing'),(10, 'william', 26, 50000, 'hr');
 
+
 select * from employees;
 +----+---------+-----+--------+------------+
 | id | name    | age | salary | department |
