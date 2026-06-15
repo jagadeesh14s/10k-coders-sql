@@ -1,0 +1,149 @@
+create table departments (dept_id int primary key, dept_name varchar(30));
+insert into departments values (1,'IT'), (2,'HR'), (3,'Finance'), (4,'Sales');
+select * from departments;
++---------+-----------+
+| dept_id | dept_name |
++---------+-----------+
+|       1 | IT        |
+|       2 | HR        |
+|       3 | Finance   |
+|       4 | Sales     |
++---------+-----------+
+4 rows in set (0.0014 sec)
+
+create table employees (emp_id int primary key, emp_name varchar(50), dept_id int, salary decimal(10,2));
+insert into employees values (101,'Ravi',1,50000), (102,'Priya',2,45000), (103,'Arjun',1,60000), (104,'Sneha',4,55000), (105,'Kiran',null,65000);
+select * from employees;
++--------+----------+---------+----------+
+| emp_id | emp_name | dept_id | salary   |
++--------+----------+---------+----------+
+|    101 | Ravi     |       1 | 50000.00 |
+|    102 | Priya    |       2 | 45000.00 |
+|    103 | Arjun    |       1 | 60000.00 |
+|    104 | Sneha    |       4 | 55000.00 |
+|    105 | Kiran    |    NULL | 65000.00 |
++--------+----------+---------+----------+
+5 rows in set (0.1068 sec)
+
+create table projects (project_id int primary key, project_name varchar(50), dept_id int);
+insert into projects values (1,'CRM System',1), (2,'Recruitment Portal',2), (3,'Payroll System',3), (4,'Sales Dashboard',4), (5,'Inventory App',null);
+select * from projects;
++------------+--------------------+---------+
+| project_id | project_name       | dept_id |
++------------+--------------------+---------+
+|          1 | CRM System         |       1 |
+|          2 | Recruitment Portal |       2 |
+|          3 | Payroll System     |       3 |
+|          4 | Sales Dashboard    |       4 |
+|          5 | Inventory App      |    NULL |
++------------+--------------------+---------+
+5 rows in set (0.0085 sec)
+
+1)select e.emp_name, d.dept_name from employees e inner join departments d on e.dept_id = d.dept_id;
++----------+-----------+
+| emp_name | dept_name |
++----------+-----------+
+| Ravi     | IT        |
+| Priya    | HR        |
+| Arjun    | IT        |
+| Sneha    | Sales     |
++----------+-----------+
+4 rows in set (0.0018 sec)
+
+2)select e.emp_id, e.emp_name, d.dept_name from employees e inner join departments d on e.dept_id = d.dept_id;
++--------+----------+-----------+
+| emp_id | emp_name | dept_name |
++--------+----------+-----------+
+|    101 | Ravi     | IT        |
+|    102 | Priya    | HR        |
+|    103 | Arjun    | IT        |
+|    104 | Sneha    | Sales     |
++--------+----------+-----------+
+4 rows in set (0.0009 sec)
+
+3)select e.emp_name, d.dept_name from employees e left join departments d on e.dept_id = d.dept_id;
++----------+-----------+
+| emp_name | dept_name |
++----------+-----------+
+| Ravi     | IT        |
+| Priya    | HR        |
+| Arjun    | IT        |
+| Sneha    | Sales     |
+| Kiran    | NULL      |
++----------+-----------+
+5 rows in set (0.0009 sec)
+
+4)select e.emp_name, d.dept_name from employees e right join departments d on e.dept_id = d.dept_id;
++----------+-----------+
+| emp_name | dept_name |
++----------+-----------+
+| Arjun    | IT        |
+| Ravi     | IT        |
+| Priya    | HR        |
+| NULL     | Finance   |
+| Sneha    | Sales     |
++----------+-----------+
+5 rows in set (0.0010 sec)
+
+5)select emp_id, emp_name from employees where dept_id is null;
++--------+----------+
+| emp_id | emp_name |
++--------+----------+
+|    105 | Kiran    |
++--------+----------+
+1 row in set (0.0011 sec)
+
+6)select d.dept_name, p.project_name from departments d inner join projects p on d.dept_id = p.dept_id;
++-----------+--------------------+
+| dept_name | project_name       |
++-----------+--------------------+
+| IT        | CRM System         |
+| HR        | Recruitment Portal |
+| Finance   | Payroll System     |
+| Sales     | Sales Dashboard    |
++-----------+--------------------+
+4 rows in set (0.0010 sec)
+
+7)select p.project_name, d.dept_name from projects p left join departments d on p.dept_id = d.dept_id;
++--------------------+-----------+
+| project_name       | dept_name |
++--------------------+-----------+
+| CRM System         | IT        |
+| Recruitment Portal | HR        |
+| Payroll System     | Finance   |
+| Sales Dashboard    | Sales     |
+| Inventory App      | NULL      |
++--------------------+-----------+
+5 rows in set (0.0009 sec)
+
+8)select e.emp_name, d.dept_name, p.project_name from employees e inner join departments d on e.dept_id = d.dept_id inner join projects p on d.dept_id = p.dept_id;
++----------+-----------+--------------------+
+| emp_name | dept_name | project_name       |
++----------+-----------+--------------------+
+| Arjun    | IT        | CRM System         |
+| Ravi     | IT        | CRM System         |
+| Priya    | HR        | Recruitment Portal |
+| Sneha    | Sales     | Sales Dashboard    |
++----------+-----------+--------------------+
+4 rows in set (0.0012 sec)
+
+9)select d.dept_id, d.dept_name from departments d left join employees e on d.dept_id = e.dept_id where e.emp_id is null;
++---------+-----------+
+| dept_id | dept_name |
++---------+-----------+
+|       3 | Finance   |
++---------+-----------+
+1 row in set (0.0009 sec)
+
+10)select e.emp_name as employee, m.emp_name as manager from employees e left join employees m on e.dept_id = m.dept_id and e.emp_id <> m.emp_id;
++----------+---------+
+| employee | manager |
++----------+---------+
+| Ravi     | Arjun   |
+| Priya    | NULL    |
+| Arjun    | Ravi    |
+| Sneha    | NULL    |
+| Kiran    | NULL    |
++----------+---------+
+5 rows in set (0.0013 sec)
+  
